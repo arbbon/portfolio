@@ -1,129 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@s</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Java Developer skilled in building fast, scalable, and clean backend systems.">
-    <meta name="application-name" content="guns.lol">
     <meta name="author" content="@skilljava | guns.lol">
-    <meta name="generator" content="guns.lol">
-    <meta name="robots" content="index, follow">
-    <meta property="og:title" content="@skilljava | guns.lol">
-    <meta property="og:description" content="Java Developer skilled in building fast, scalable, and clean backend systems.">
-    <meta property="og:image" content="https://og.guns.lol/api/og?username=skilljava&amp;t=1763903776167">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="@skilljava | guns.lol">
-    <meta name="twitter:description" content="Java Developer skilled in building fast, scalable, and clean backend systems.">
-    <meta name="twitter:image" content="https://og.guns.lol/api/og?username=skilljava&amp;t=1763903776167">
-    <link rel="stylesheet" href="/_next/static/css/cdeae98f92368413.css" data-precedence="next">
-    <link rel="stylesheet" href="/_next/static/css/40bb763088faef03.css" data-precedence="next">
-    <link rel="stylesheet" href="/_next/static/css/5b1ef379c7a1d1fd.css" data-precedence="next">
-    <link rel="stylesheet" href="/_next/static/css/02d08b9bf9420ef0.css" data-precedence="next">
-    <link href="https://assets.guns.lol/fonts/X6XYTKIVDUW7GZTZPZNN4EUM5KH54KHF.css" rel="stylesheet">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://assets.guns.lol/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://assets.guns.lol/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="https://assets.guns.lol/favicon/favicon-16x16.png">
-    <link rel="manifest" href="https://assets.guns.lol/favicon/site.webmanifest">
-    <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta name="theme-color" content="#ffffff">
-    <style>
-        body { transition: opacity ease-in 0.2s; }
-        body[unresolved] { opacity: 0; display: block; overflow: hidden; position: relative; }
-        body, * { font-family: 'Satoshi', sans-serif !important; }
-    </style>
-    <script src="/_next/static/chunks/polyfills-42372ed130431b0a.js" nomodule></script>
-    <script src="https://assets.guns.lol/cursor-effects.js" id="_cursor"></script>
-    <script id="_code">
-        const workerScript = `
-            import init, { GunsSolver } from 'https://assets.guns.lol/pkg/_gunslolpow.js';
-            self.onmessage = async function (event) {
-                const { ps, d, c, _n, org_ts } = event.data;
-                await init();
-                const solver = new GunsSolver(ps, c, parseInt(d), false, _n);
-                const ts = Math.floor(Date.now() / 1000);
-                const offset = ts - Number(org_ts);
-                const tsp = ts - offset;
-                const result = await solver.solve_pow();
-                if (result !== null) {
-                    self.postMessage({ result, ps, tsp, _n, c });
-                }
-            };
-        `;
-        const blob = new Blob([workerScript], { type: "application/javascript" });
-        const worker = new Worker(URL.createObjectURL(blob), { type: "module" });
-        worker.postMessage({
-            ps: 'a96f6e3e58d50d0b5e8c401b437267a4f764fb418fe98e9df77a05dfb33',
-            d: '5',
-            c: '57b39d32deff7c5a017cf283442c0e8dc6e01b5ca951669cc52de34d2a4885f0',
-            _n: 'WbkNobNaQnPqwQlz',
-            org_ts: '1763903776'
-        });
-        worker.onmessage = async function (event) {
-            const { result } = event.data;
-            if (result !== undefined) {
-                await getResult(result);
-            }
-        };
-    </script>
+    <title>@skilljava | Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="https://assets.guns.lol/favicon/favicon-32x32.png" type="image/png">
 </head>
-<body unresolved>
-    <div id="app">
-        <header>
-            <h1>Welcome to @skilljava's Page</h1>
+<body>
+    <header>
+        <div class="container">
+            <h1>@skilljava</h1>
+            <p>Java Developer | Clean & Scalable Backend</p>
             <nav>
                 <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/projects">Projects</a></li>
-                    <li><a href="/about">About</a></li>
-                    <li><a href="/contact">Contact</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
-        </header>
-        <main>
-            <section>
-                <h2>About Me</h2>
-                <p>Java Developer skilled in building fast, scalable, and clean backend systems. Passionate about problem solving and learning new technologies.</p>
-            </section>
-            <section>
-                <h2>Projects</h2>
-                <article>
-                    <h3>Project One</h3>
-                    <p>Description of project one with details about technologies used and challenges solved.</p>
-                </article>
-                <article>
-                    <h3>Project Two</h3>
-                    <p>Description of project two with details about technologies used and achievements.</p>
-                </article>
-            </section>
-            <section>
-                <h2>Contact</h2>
-                <form id="contactForm">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required>
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                    <label for="message">Message:</label>
-                    <textarea id="message" name="message" required></textarea>
-                    <button type="submit">Send</button>
-                </form>
-            </section>
-        </main>
-        <footer>
-            <p>&copy; 2025 @skilljava | guns.lol. All rights reserved.</p>
-        </footer>
-    </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const body = document.body;
-            body.removeAttribute("unresolved");
-            const form = document.getElementById("contactForm");
-            form.addEventListener("submit", (e) => {
-                e.preventDefault();
-                alert("Message sent! Thank you for contacting.");
-            });
-        });
-    </script>
+        </div>
+    </header>
+
+    <section id="projects">
+        <div class="container">
+            <h2>Projects</h2>
+            <div class="cards">
+                <div class="card">
+                    <h3>Project 1</h3>
+                    <p>Fast backend API using Spring Boot and PostgreSQL.</p>
+                </div>
+                <div class="card">
+                    <h3>Project 2</h3>
+                    <p>Microservices architecture with Docker and Kubernetes.</p>
+                </div>
+                <div class="card">
+                    <h3>Project 3</h3>
+                    <p>Real-time messaging system using WebSocket.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h2>Skills</h2>
+            <ul class="skills-list">
+                <li>Java</li>
+                <li>Spring Boot</li>
+                <li>Microservices</li>
+                <li>PostgreSQL & MySQL</li>
+                <li>Docker & Kubernetes</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Me</h2>
+            <form>
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 @skilljava | guns.lol</p>
+        </div>
+    </footer>
 </body>
 </html>
