@@ -205,39 +205,47 @@ body{
   pointer-events:none;
 }
 
-/* ====== NAV CARDS ====== */
-.nav-cards-container {
+/* ====== INFO CARDS ====== */
+.info-cards-container {
   position: absolute;
-  bottom: 50px;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, 120%);
   display: flex;
   gap: 20px;
   z-index: 20;
 }
 
-.nav-card {
+.info-card {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255,255,255,0.1);
   backdrop-filter: blur(8px);
   border-radius: 14px;
-  padding: 20px 40px;
+  padding: 20px 30px;
   color: white;
-  font-weight: 600;
-  font-size: 1.2rem;
-  text-align: center;
-  transition: transform 0.3s cubic-bezier(.2,.9,.2,1), background 0.3s;
-  cursor: pointer;
-}
-
-.nav-card:hover {
-  transform: scale(1.4);
-  background: rgba(255, 26, 26, 0.15);
-}
-
-.nav-cards-container.hovered .nav-card:not(:hover) {
-  transform: scale(0.8);
+  font-weight: 500;
+  font-size: 1rem;
+  text-align: left;
+  width: 220px;
   transition: transform 0.3s cubic-bezier(.2,.9,.2,1);
+}
+
+.info-card:hover {
+  transform: scale(1.2);
+}
+
+.info-cards-container.hovered .info-card:not(:hover) {
+  transform: scale(0.9);
+}
+.info-card h3 {
+  margin:0 0 10px 0;
+  font-size: 1.2rem;
+  color: var(--accent, #ff4b4b);
+}
+.info-card p {
+  margin:0;
+  font-size: 0.9rem;
+  line-height: 1.4;
 }
 </style>
 </head>
@@ -277,12 +285,24 @@ body{
     </div>
   </div>
 
-  <!-- NAV CARDS -->
-  <div class="nav-cards-container">
-    <div class="nav-card">Projects</div>
-    <div class="nav-card">Links</div>
-    <div class="nav-card">About Me</div>
-    <div class="nav-card">Contact</div>
+  <!-- INFO CARDS -->
+  <div class="info-cards-container">
+    <div class="info-card">
+      <h3>Projects</h3>
+      <p>Example: Java Discord bot, server management tools, web apps for small communities.</p>
+    </div>
+    <div class="info-card">
+      <h3>Links</h3>
+      <p>Example: GitHub: github.com/skilljava | Portfolio: skilljava.dev | Discord Server.</p>
+    </div>
+    <div class="info-card">
+      <h3>About Me</h3>
+      <p>Example: Java developer, Discord bot creator, enjoys optimizing code and managing game servers.</p>
+    </div>
+    <div class="info-card">
+      <h3>Contact</h3>
+      <p>Example: Discord DM @skilljava, Email example@domain.com, Open to collaborations.</p>
+    </div>
   </div>
 
 </header>
@@ -337,16 +357,14 @@ function drawGrid() {
 
 drawGrid();
 
-/* ====== NAV CARD HOVER LOGIC ====== */
-const container = document.querySelector('.nav-cards-container');
-const cards = container.querySelectorAll('.nav-card');
+/* ====== INFO CARDS HOVER LOGIC ====== */
+const infoContainer = document.querySelector('.info-cards-container');
 
-container.addEventListener('mouseenter', () => {
-  container.classList.add('hovered');
+infoContainer.addEventListener('mouseenter', () => {
+  infoContainer.classList.add('hovered');
 });
-
-container.addEventListener('mouseleave', () => {
-  container.classList.remove('hovered');
+infoContainer.addEventListener('mouseleave', () => {
+  infoContainer.classList.remove('hovered');
 });
 </script>
 
