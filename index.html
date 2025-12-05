@@ -10,7 +10,7 @@
 
 <style>
     /* ---------------------------------------------------------------------------------- */
-    /* استایل‌های Header جدید (از header.html) */
+    /* استایل‌های Header جدید (برای افکت بلور و شفافیت) */
     /* ---------------------------------------------------------------------------------- */
     :root {
         /* تعریف متغیرهای جدید برای جلوگیری از تداخل */
@@ -63,6 +63,9 @@
     }
 </style>
 <style>
+/* ---------------------------------------------------------------------------------- */
+/* استایل‌های اصلی سایت شما */
+/* ---------------------------------------------------------------------------------- */
 :root{
   --bg:#0b0b0b;
   --red:#ff1a1a;
@@ -247,11 +250,61 @@ a { text-decoration: none; color: inherit; }
     transform: translate(-50%, -50%); z-index: 1; pointer-events: none;
     transition: transform 0.05s linear;
 }
+
+/* --- Spotify Progress Bar --- */
+.spotify-progress-bar {
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    margin-top: 5px;
+    margin-bottom: 2px;
+    overflow: hidden;
+}
+.spotify-progress-fill {
+    height: 100%;
+    width: 0%;
+    background-color: var(--green); /* یا رنگ دلخواه */
+    transition: width 1s linear;
+}
+.spotify-timestamps {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.discord-activity-item {
+    border-left: 3px solid;
+    padding-left: 10px;
+    margin-bottom: 10px;
+}
+.discord-activity-title {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text);
+    display: block;
+}
+.discord-activity-details {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    display: block;
+}
+
 </style>
 </head>
 <body>
 
-<div id="header-placeholder"></div>
+<header class="site-header">
+    <nav class="nav-links">
+        <a href="#">تماس با ما</a>
+        <a href="#">بلاگ</a>
+        <a href="#">درباره ما</a>
+        <a href="#">تعرفه‌ها</a>
+        <a href="hosting.html" class="active">خدمات <i class="fa-solid fa-chevron-down" style="font-size:0.7em"></i></a> 
+        <a href="#">محصولات</a>
+        <a href="index.html">صفحه اصلی</a> 
+    </nav>
+</header>
 <header class="header">
   <div id="mouse-glow"></div>
   <div class="canvas-wrap"><canvas id="gridCanvas" style="width:100%;height:100%;display:block;"></canvas></div>
@@ -336,29 +389,6 @@ a { text-decoration: none; color: inherit; }
 </footer>
 
 <script>
-/* START: کد جاوا اسکریپت برای بارگذاری header.html */
-function loadHeader() {
-    fetch('header.html')
-        .then(response => {
-            if (!response.ok) {
-                console.error('Header file not found (404).');
-                return Promise.reject('Failed to load header.');
-            }
-            return response.text();
-        })
-        .then(html => {
-            document.getElementById('header-placeholder').innerHTML = html;
-        })
-        .catch(error => {
-            console.error('Error loading header:', error);
-            document.getElementById('header-placeholder').innerHTML = '<div style="color:red; text-align:center; padding: 10px;">Error loading navigation.</div>';
-        });
-}
-
-loadHeader();
-/* END: کد جاوا اسکریپت برای بارگذاری header.html */
-
-
 // --- Grid & Particle Canvas ---
 const gridCanvas=document.getElementById("gridCanvas");
 const gc=gridCanvas.getContext("2d");
