@@ -16,8 +16,6 @@
     /* متغیرهای اصلی سایت */
     --bg:#0b0b0b;
     --red:#ff1a1a;
-    --muted-red: rgba(255,26,26,0.18);
-    --glass-bg: rgba(255,255,255,0.03);
     --glass-border: rgba(255,255,255,0.06);
     --text:#ffffff;
     --accent:#ff4b4b;
@@ -36,16 +34,16 @@
 }
 
 /* ---------------------------------------------------------------------------------- */
-/* 2. استایل‌های پایه (Base Styles) */
+/* 2. استایل‌های پایه (Base Styles) - **اصلاح ارتفاع برای رفع باگ سفید شدن** */
 /* ---------------------------------------------------------------------------------- */
 *{box-sizing:border-box;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 html,body{
-    /* تنظیم ارتفاع برای نمایش درست پس‌زمینه */
-    height:100%; 
+    /* **اصلاح کلیدی:** استفاده از min-height برای تضمین نمایش حداقل یک صفحه */
+    min-height:100vh; 
     margin:0; 
     padding:0;
     font-family:'Ubuntu',Inter,ui-sans-serif,system-ui,-apple-system,sans-serif;
-    background:var(--bg); /* تضمین رنگ پس‌زمینه تیره */
+    background:var(--bg); /* **تضمین رنگ پس‌زمینه تیره** */
     color:var(--text);
     line-height:1.45; 
     overflow-x:hidden; 
@@ -107,7 +105,7 @@ a { text-decoration: none; color: inherit; }
 .header{
     position:relative; 
     width:100%; 
-    min-height:100vh; /* تضمین ارتفاع */
+    min-height:100vh; /* تضمین ارتفاع برای جلوگیری از سفید شدن */
     height: auto;
     overflow:hidden; 
     display:flex; 
@@ -116,15 +114,26 @@ a { text-decoration: none; color: inherit; }
     /* تضمین پس‌زمینه تیره با گرادینت قرمز */
     background: linear-gradient(180deg, rgba(20,8,8,0.76) 0%, rgba(12,6,6,0.88) 60%), linear-gradient(180deg, rgba(16,2,2,0.25), rgba(8,0,0,0.0));
     padding-bottom: 50px; 
-    padding-top: 50px; /* فضای بالا برای جلوگیری از چسبیدن به هدر ناوبری */
+    padding-top: 50px; 
 }
 
-/* افکت‌های پس‌زمینه: **این بخش برای نمایش پس‌زمینه تیره حیاتی است** */
+/* افکت‌های پس‌زمینه (قبل و بعد) */
 .header::before{content:"";position:absolute;inset:0;background: radial-gradient(circle at 30% 40%, rgba(255,20,20,0.18) 0%, rgba(0,0,0,0) 40%);filter: blur(34px);z-index:0;pointer-events:none;}
 .header::after{content:"";position:absolute;inset:0;background: linear-gradient(180deg, rgba(255,20,20,0.02), rgba(0,0,0,0.12));z-index:1;pointer-events:none;}
 
-.canvas-wrap{position:absolute;inset:0;z-index:2;pointer-events:none;}
-.particle-wrap{position:absolute;inset:0;z-index:3;pointer-events:none;}
+/* **اصلاح کلیدی:** اطمینان از Fixed بودن Canvas‌ها نسبت به ویوپورت برای رفع باگ نمایش */
+.canvas-wrap, .particle-wrap{
+    position: fixed; /* تغییر مهم: Fixed به جای Absolute */
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    height: 100vh; /* اطمینان از پوشش کامل صفحه */
+    width: 100vw;
+}
+.particle-wrap {
+    z-index: 3;
+}
+
 
 .header-inner{
     position:relative; z-index:10; max-width:var(--max-width); margin:0 auto;
@@ -139,7 +148,7 @@ a { text-decoration: none; color: inherit; }
     max-width: 100%;
 }
 
-/* آواتار */
+/* --- آواتار و وضعیت (بدون تغییر) --- */
 .avatar{
     position: relative; 
     width:var(--avatar-size); height:var(--avatar-size);
@@ -149,7 +158,6 @@ a { text-decoration: none; color: inherit; }
     position: absolute; top: -10px; left: -10px;
     width: calc(var(--avatar-size) + 20px); height: calc(var(--avatar-size) + 20px);
     border-radius: 50%;
-    /* اطمینان از وجود این فایل عکس */
     background: url('angry.png') center / cover; 
     z-index: 5; pointer-events: none;
 }
@@ -165,7 +173,7 @@ a { text-decoration: none; color: inherit; }
   display: flex; align-items: center; justify-content: center; z-index: 6; 
 }
 
-/* متن‌ها و کارت‌ها */
+/* --- متن‌ها و کارت‌ها (بدون تغییر) --- */
 .meta{display:flex;flex-direction:column;gap:6px;}
 .meta .name{font-size:1.55rem;font-weight:700;color:var(--text);}
 .meta .subtitle{font-size:0.92rem;color:rgba(255,255,255,0.72);}
@@ -200,15 +208,6 @@ a { text-decoration: none; color: inherit; }
 }
 .info-card:hover{ transform: translateY(-5px); box-shadow: 0 10px 20px rgba(255, 75, 75, 0.15); }
 
-/* لینک‌های شبکه‌های اجتماعی */
-.social-link{
-  display: flex; align-items: center; gap: 12px;
-  text-decoration: none; color: rgba(255,255,255,0.9);
-  margin-bottom: 10px; font-size: 0.95rem; transition: color 0.3s ease;
-}
-.social-link:hover{color: var(--accent);}
-.social-icon{width: 20px; text-align: center; color: var(--accent);}
-
 /* --- Spotify Progress Bar و وضعیت دیسکورد --- */
 #dndStatusBadge {
     display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px;
@@ -238,8 +237,7 @@ a { text-decoration: none; color: inherit; }
 .spotify-title { font-weight: 700; font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .spotify-artist { font-size: 0.8rem; color: rgba(255, 255, 255, 0.7); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-
-/* --- Responsive Media Query --- */
+/* --- Responsive Media Query (بدون تغییر) --- */
 @media (max-width: 768px) {
     .container { padding: 20px 15px; }
     .site-header { padding: 10px 15px; }
@@ -256,7 +254,6 @@ a { text-decoration: none; color: inherit; }
     .info-card {
         width: 100%; max-width: 100%;
     }
-    /* پنهان کردن افکت ماوس در موبایل */
     #mouse-glow { display: none !important; }
 }
 </style>
@@ -361,7 +358,6 @@ a { text-decoration: none; color: inherit; }
 <script>
 // --- Grid & Particle Canvas ---
 const gridCanvas=document.getElementById("gridCanvas");
-// فقط در صورت وجود المنت‌ها، عملیات را انجام بده
 if (gridCanvas) {
     const gc=gridCanvas.getContext("2d");
     function resizeGrid(){gridCanvas.width=window.innerWidth;gridCanvas.height=window.innerHeight;}
@@ -390,7 +386,7 @@ if (infoContainer) {
 }
 
 
-// --- Discord Lanyard Integration (بدون تغییر در منطق، فقط افزودن چک‌های خطا) ---
+// --- Discord Lanyard Integration ---
 const DISCORD_USER_ID = '1275540868186636348'; 
 
 const statusDot = document.getElementById('discordStatusDot'); 
