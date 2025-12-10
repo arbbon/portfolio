@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>@skilljava | توسعه‌دهنده وب</title>
+    <meta name="description" content="پورتفولیو حرفه‌ای توسعه‌دهنده وب - @skilljava">
+
+    <!-- Vazirmatn Font -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="assets/lang/java.svg">
+</head>
+<body class="loading-state">
+
+    <!-- 0. PRELOADER -->
+    <div id="loader">
+        <div class="loader-content">
+            <div class="hex-spinner"></div>
+            <div class="loader-text">INITIALIZING CORE...</div>
+            <div class="loader-bar"><div class="loader-fill"></div></div>
+        </div>
+    </div>
+
+    <!-- 1. BACKGROUND LAYERS -->
+    <div class="fixed-bg">
+        <canvas id="particle-canvas"></canvas>
+        <div class="noise-layer"></div>
+        <div class="scanlines"></div>
+        <div class="vignette"></div>
+    </div>
+
+    <!-- 2. CUSTOM CURSOR -->
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
+
+    <!-- 3. SIDEBAR -->
+    <aside class="sidebar glass-panel">
+        <a href="https://aria-host.ir" target="_blank" class="sidebar-icon magnetic" aria-label="Aria Host">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+            <span class="tooltip">آریا هاست</span>
+        </a>
+    </aside>
+
+    <!-- 4. TOGGLES -->
+    <div class="controls">
+        <button id="anim-toggle" class="control-btn glass-btn" aria-label="Toggle Animation">
+            <span class="status-indicator"></span>
+            انیمیشن
+        </button>
+    </div>
+
+    <!-- 5. MAIN CONTENT -->
+    <main id="smooth-wrapper">
+        <div id="smooth-content">
+
+            <!-- HERO SECTION -->
+            <section id="hero" class="section hero-section">
+                <div class="container hero-layout">
+                    
+                    <div class="hero-content" data-anim="stagger-up">
+                        <div class="badge-wrapper">
+                            <div class="status-badge glass-btn">
+                                <span class="pulse-dot"></span>
+                                آماده همکاری
+                            </div>
+                        </div>
+                        
+                        <h1 class="hero-title glitch" data-text="@skilljava">@skilljava</h1>
+                        
+                        <h2 class="hero-subtitle">
+                            توسعه‌دهنده <span class="neon-text">فول‌استک</span> و <span class="neon-text">نرم‌افزار</span>
+                        </h2>
+                        
+                        <p class="hero-desc">
+                            متخصص در معماری سیستم‌های مقیاس‌پذیر و رابط‌های کاربری مدرن.
+                            تمرکز بر کارایی، امنیت و تجربه کاربری روان.
+                        </p>
+                        
+                        <div class="hero-actions">
+                            <a href="#contact" class="neon-btn magnetic">شروع همکاری</a>
+                            <a href="#about" class="glass-btn magnetic">درباره من</a>
+                        </div>
+                    </div>
+
+                    <div class="hero-visual" data-anim="scale-in">
+                        <div class="profile-card glass-card tilt-element">
+                            <div class="card-glow"></div>
+                            <div class="img-wrapper">
+                                <img src="assets/images/profile.png" alt="Profile" class="profile-img">
+                                <div class="scan-line"></div>
+                            </div>
+                            
+                            <!-- Floating Decorations -->
+                            <div class="float-shape s1"></div>
+                            <div class="float-shape s2"></div>
+                            <div class="float-shape s3"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="scroll-down">
+                    <div class="mouse-icon">
+                        <div class="wheel"></div>
+                    </div>
+                    <span>اسکرول کنید</span>
+                </div>
+            </section>
+
+            <!-- MARQUEE TOP -->
+            <div class="marquee-strip glass-strip">
+                <div class="marquee-content" id="marquee-top">
+                    <!-- JS Injected -->
+                </div>
+            </div>
+
+            <!-- ABOUT SECTION -->
+            <section id="about" class="section about-section">
+                <div class="bg-gradient-spot"></div>
+                <div class="container">
+                    <div class="section-header center" data-anim="fade-up">
+                        <h2 class="section-title">درباره <span class="neon-text">من</span></h2>
+                        <div class="neon-separator"></div>
+                    </div>
+
+                    <div class="about-content">
+                        <div class="about-text glass-card" data-anim="slide-right">
+                            <p>
+                                من یک توسعه‌دهنده با اشتیاق به خلق راه‌حل‌های نوآورانه هستم. 
+                                با سال‌ها تجربه در اکوسیستم جاوا و وب، سعی می‌کنم شکاف بین پیچیدگی‌های فنی و تجربه کاربری ساده را پر کنم.
+                                کدنویسی برای من فقط شغل نیست، بلکه هنری است برای خلق سیستم‌های زنده و پویا.
+                            </p>
+                        </div>
+
+                        <div class="stats-row" data-anim="stagger-up">
+                            <div class="stat-item glass-card magnetic">
+                                <span class="stat-num counter" data-target="3">0</span>
+                                <span class="stat-label">سال تجربه</span>
+                            </div>
+                            <div class="stat-item glass-card magnetic">
+                                <span class="stat-num counter" data-target="20">0</span>
+                                <span class="stat-label">پروژه موفق</span>
+                            </div>
+                            <div class="stat-item glass-card magnetic">
+                                <span class="stat-num counter" data-target="100">0</span>
+                                <span class="stat-label">تعهد کاری</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SKILLS SECTION -->
+            <section id="skills" class="section skills-section">
+                <div class="container">
+                    <div class="section-header center" data-anim="fade-up">
+                        <h2 class="section-title">جعبه ابزار <span class="neon-text">تکنولوژی</span></h2>
+                        <div class="neon-separator"></div>
+                    </div>
+
+                    <div class="skills-orbit-container" id="skills-container" data-anim="scale-in">
+                        <!-- JS Injected Logos Only -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- MARQUEE BOTTOM -->
+            <div class="marquee-strip glass-strip reverse">
+                <div class="marquee-content" id="marquee-bottom">
+                    <!-- JS Injected -->
+                </div>
+            </div>
+
+            <!-- CONTACT SECTION -->
+            <section id="contact" class="section contact-section">
+                <div class="container">
+                    <div class="contact-card glass-card" data-anim="fade-up">
+                        <div class="contact-header">
+                            <h3>ارتباط با من</h3>
+                            <p>پروژه‌ای در ذهن دارید؟ همین حالا پیام دهید.</p>
+                        </div>
+
+                        <form class="contact-form" id="contact-form">
+                            <div class="form-group">
+                                <input type="text" id="name" required placeholder=" ">
+                                <label for="name">نام شما</label>
+                                <div class="focus-line"></div>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="email" required placeholder=" ">
+                                <label for="email">ایمیل</label>
+                                <div class="focus-line"></div>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="msg" required placeholder=" " rows="4"></textarea>
+                                <label for="msg">پیام</label>
+                                <div class="focus-line"></div>
+                            </div>
+                            <button type="submit" class="neon-btn full-width magnetic">ارسال پیام</button>
+                        </form>
+
+                        <div class="contact-socials">
+                            <a href="#" class="social-icon magnetic" aria-label="Email">📧</a>
+                            <a href="#" class="social-icon magnetic" aria-label="Discord">💬</a>
+                            <a href="#" class="social-icon magnetic" aria-label="GitHub">💻</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FOOTER -->
+            <footer class="main-footer glass-strip">
+                <div class="container footer-inner">
+                    <div class="footer-brand">@skilljava</div>
+                    <div class="footer-copy">
+                        © 2025 توسعه داده شده با ❤️ و کد خالص (Vanilla JS).
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
