@@ -1,356 +1,121 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | Developer</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css"> 
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>@skilljava</title>
+
+  <!-- Vazirmatn Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Vazirmatn', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #1a1a1a, #000);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    /* subtle animated glow */
+    body::before {
+      content: "";
+      position: absolute;
+      inset: -50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 40%);
+      animation: glow 8s infinite alternate;
+    }
+
+    @keyframes glow {
+      0% { transform: translate(-10%, -10%); }
+      100% { transform: translate(10%, 10%); }
+    }
+
+    .glass {
+      position: relative;
+      width: min(90%, 420px);
+      padding: 2.5rem 2rem;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow:
+        0 0 40px rgba(255,255,255,0.08),
+        inset 0 0 20px rgba(255,255,255,0.05);
+      text-align: center;
+      z-index: 1;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      background: rgba(255,255,255,0.15);
+      margin-bottom: 1rem;
+      backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 0.8rem;
+      text-shadow: 0 0 10px rgba(255,255,255,0.2);
+    }
+
+    p {
+      font-size: 0.95rem;
+      line-height: 1.9;
+      opacity: 0.9;
+    }
+
+    .loader {
+      margin: 2rem auto 0;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 3px solid rgba(255,255,255,0.2);
+      border-top-color: #fff;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    footer {
+      margin-top: 1.8rem;
+      font-size: 0.75rem;
+      opacity: 0.6;
+    }
+  </style>
 </head>
 <body>
 
-    <div class="portfolio-container">
-        
-        <aside class="profile-info-card">
-            <div class="profile-header">
-                <div class="profile-avatar-wrapper">
-                    <div class="profile-avatar">
-                        <i class="fa-solid fa-code"></i> 
-                    </div>
-                    <div id="discordStatusDot" class="status-dot-new">
-                        <i id="statusIcon" class="fas fa-circle-notch"></i>
-                    </div> 
-                </div>
-                
-                <h1 class="user-name">skilljava</h1>
-                <p class="title">Developer & System Architect</p>
-                
-                <div class="order-status-badge">
-                    <span class="dot" id="orderStatusDot"></span>
-                    <span id="orderStatusText">Ready to accept orders</span>
-                </div>
-            </div>
-            
-            <div class="details-section">
-                <div class="detail-item">
-                    <span class="label">Email</span>
-                    <span class="value"><a href="mailto:z0roskillofficial@gmail.com" target="_blank">z0roskillofficial@gmail.com</a></span>
-                </div>
-                <div class="detail-item">
-                    <span class="label">Discord</span>
-                    <span class="value">skilljava</span>
-                </div>
-                <div class="detail-item">
-                    <span class="label">Date of Birth</span>
-                    <span class="value">September 10, 2020</span>
-                </div>
-                
-                <div class="contact-links">
-                    <a href="mailto:z0roskillofficial@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-                    <a href="https://discordapp.com/users/skilljava" aria-label="Discord"><i class="fab fa-discord"></i></a>
-                    <a href="https://github.com/skilljava" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                </div>
-            </div>
-            
-            <div class="discord-activity-card card">
-                 <h3 class="discord-card-header">
-                     <i class="fab fa-discord lime-text"></i> Live Status
-                     <span id="dndStatusBadge" class="dnd-badge"></span>
-                 </h3>
-                 <div id="spotifyContent"></div>
-                 <div id="discordActivityContent">
-                     <p style="text-align:center; opacity:0.7">Loading status...</p>
-                 </div>
-            </div>
+  <div class="glass">
+    <span class="badge">🚧 در حال تعمیر</span>
+    <h1>به‌زودی برمی‌گردیم</h1>
+    <p>
+      این وب‌سایت در حال بروزرسانی و بهبود است.<br>
+      داریم یه چیز خفن‌تر می‌سازیم، فقط کمی صبر 👀
+    </p>
 
-        </aside>
+    <div class="loader"></div>
 
-        <main class="main-content">
-            
-            <section class="about-me card">
-                <h2>About Me</h2>
-                <p>
-                    I am a developer focused on designing scalable and stable systems. With a background in backend development and managing large servers, I have honed my skills in creating strong infrastructures and optimizing project performance.
-                </p>
-                <p>
-                    My passion for development extends beyond mere coding; I am committed to project management, building active communities, and leading technical teams to achieve great goals.
-                </p>
-                <div class="contact-action">
-                    <p>Ready to start a new project? <span class="lime-text">Contact me right now!</span></p>
-                    <a href="https://discordapp.com/users/skilljava" target="_blank" class="contact-button">Contact via Discord</a>
-                </div>
-            </section>
+    <footer>
+      © skilljava
+    </footer>
+  </div>
 
-            <section class="what-i-do-grid">
-                <div class="card service-item">
-                    <h3><i class="fa-solid fa-server lime-text"></i> System Architecture</h3>
-                    <p>Designing and implementing cloud infrastructures and highly scalable servers for heavy traffic loads.</p>
-                </div>
-                <div class="card service-item">
-                    <h3><i class="fa-solid fa-laptop-code lime-text"></i> Backend Development</h3>
-                    <p>Writing clean, modular, and optimized code for core systems, with a focus on security and efficiency.</p>
-                </div>
-            </section>
-
-            <section class="my-skills card">
-                <h2>My Skills</h2>
-                <div class="skills-list">
-                    <div class="skill-icon-box"><i class="fab fa-python skill-icon"></i><span class="skill-name">Python</span></div>
-                    <div class="skill-icon-box"><i class="fab fa-java skill-icon"></i><span class="skill-name">Java</span></div>
-                    <div class="skill-icon-box"><i class="fab fa-js-square skill-icon"></i><span class="skill-name">JavaScript</span></div>
-                    <div class="skill-icon-box"><i class="fab fa-react skill-icon"></i><span class="skill-name">React (Front)</span></div>
-                    <div class="skill-icon-box"><i class="fas fa-database skill-icon"></i><span class="skill-name">SQL / NoSQL</span></div>
-                    <div class="skill-icon-box"><i class="fab fa-docker skill-icon"></i><span class="skill-name">Docker</span></div>
-                    <div class="skill-icon-box"><i class="fab fa-aws skill-icon"></i><span class="skill-name">Cloud (AWS)</span></div>
-                    <div class="skill-icon-box"><i class="fab fa-git-alt skill-icon"></i><span class="skill-name">Git</span></div>
-                </div>
-            </section>
-
-            <section class="projects-section card">
-                <h2>Projects</h2>
-                <div class="projects-grid">
-                    <a href="https://store.freshsmp.fun" target="_blank" class="project-item">
-                        <img src="path/to/freshsmp-logo.png" alt="FreshSMP Logo" class="project-logo">
-                        <div class="project-details">
-                            <span class="project-name">FreshSMP Store</span>
-                            <span class="project-role">E-commerce Development & Infrastructure</span>
-                        </div>
-                    </a>
-                    <a href="https://zedarmc.com" target="_blank" class="project-item">
-                        <img src="path/to/zedarmc-logo.png" alt="ZedarMC Logo" class="project-logo">
-                        <div class="project-details">
-                            <span class="project-name">ZedarMC Network</span>
-                            <span class="project-role">System Developer & Network Management</span>
-                        </div>
-                    </a>
-                </div>
-            </section>
-        </main>
-    </div>
-    
-<script>
-    // --- Discord Lanyard Integration (Updated Language) ---
-    const DISCORD_USER_ID = '1275540868186636348'; 
-    
-    // Selectors
-    const statusDot = document.getElementById('discordStatusDot'); 
-    const statusIcon = document.getElementById('statusIcon'); 
-    const activityContent = document.getElementById('discordActivityContent'); 
-    const spotifyContent = document.getElementById('spotifyContent'); 
-    const dndStatusBadge = document.getElementById('dndStatusBadge'); 
-    const orderStatusDot = document.getElementById('orderStatusDot'); 
-    const orderStatusText = document.getElementById('orderStatusText'); 
-
-    let spotifyInterval;
-
-    function formatTime(ms) {
-        const totalSeconds = Math.floor(ms / 1000);
-        const minutes = Math.floor(totalSeconds / 60);
-        const seconds = totalSeconds % 60;
-        return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-    }
-
-    function updateProgressBar(data) {
-        if (!data || !data.spotify || !data.spotify.timestamps) {
-            if (spotifyInterval) clearInterval(spotifyInterval);
-            return;
-        }
-
-        const start = data.spotify.timestamps.start;
-        const end = data.spotify.timestamps.end;
-        const now = Date.now();
-
-        const duration = end - start;
-        let elapsed = now - start;
-        
-        if (elapsed > duration) {
-            elapsed = duration;
-            if (spotifyInterval) clearInterval(spotifyInterval);
-            spotifyInterval = null;
-        }
-
-        const percentage = (elapsed / duration) * 100;
-
-        const progressFill = document.getElementById('spotifyProgressFill');
-        const currentTimeSpan = document.getElementById('spotifyCurrentTime');
-
-        if (progressFill) {
-            progressFill.style.width = `${percentage}%`;
-        }
-        if (currentTimeSpan) {
-            currentTimeSpan.textContent = formatTime(elapsed);
-        }
-    }
-
-
-    function updateDiscordStatus(data) {
-        // 1. Update overall status and decorations
-        const defaultColor = '#7f8c8d'; // Offline color
-        const limeColor = '#A3E635'; // Lime accent
-
-        // Color variables from previous style (for JS compatibility)
-        const green = '#21d07a'; // Online
-        const yellow = '#f9a825'; // Idle
-        const redDnd = '#f44336'; // Do Not Disturb
-        
-        if (!data || !data.discord_status) {
-            statusDot.style.backgroundColor = defaultColor;
-            statusIcon.className = 'fas fa-circle-notch';
-            orderStatusDot.style.backgroundColor = defaultColor;
-            orderStatusText.textContent = 'Status is unavailable';
-            
-            dndStatusBadge.innerHTML = `<i class="fas fa-circle-notch"></i> Offline`; 
-            dndStatusBadge.style.backgroundColor = defaultColor;
-            dndStatusBadge.style.color = 'white';
-            
-            activityContent.innerHTML = '<p style="text-align:center; opacity:0.7; margin-top:15px;">Discord status is unavailable or user is offline.</p>';
-            spotifyContent.innerHTML = ''; 
-            if (spotifyInterval) clearInterval(spotifyInterval);
-            spotifyInterval = null;
-            return;
-        }
-        
-        const status = data.discord_status; 
-        let color, iconClassDot, iconClassCard, iconText;
-        
-        switch (status) {
-            case 'online': 
-                color = green; 
-                iconClassDot = 'fas fa-circle'; 
-                iconClassCard = 'fas fa-circle'; 
-                iconText = 'Online'; 
-                break;
-            case 'idle': 
-                color = yellow; 
-                iconClassDot = 'fas fa-moon'; 
-                iconClassCard = 'fas fa-moon'; 
-                iconText = 'Idle'; 
-                break;
-            case 'dnd': 
-                color = redDnd; 
-                iconClassDot = 'fas fa-minus'; 
-                iconClassCard = 'fas fa-minus'; 
-                iconText = 'Do Not Disturb'; 
-                break;
-            default: 
-                color = defaultColor; 
-                iconClassDot = 'fas fa-circle-notch'; 
-                iconClassCard = 'fas fa-circle-notch'; 
-                iconText = 'Offline'; 
-                break;
-        }
-
-        statusDot.style.backgroundColor = color; 
-        statusIcon.className = iconClassDot; 
-        orderStatusDot.style.backgroundColor = color; 
-        
-        dndStatusBadge.innerHTML = `<i class="${iconClassCard}"></i> ${iconText}`;
-        dndStatusBadge.style.backgroundColor = color; 
-        
-        orderStatusText.textContent = (status === 'dnd') ? 'Currently busy / DND' : 'Ready to accept orders';
-
-
-        // 2. Update activity card (including Spotify)
-        
-        // --- Spotify Management ---
-        const isListeningToSpotify = data.spotify;
-        
-        if (spotifyInterval) {
-            clearInterval(spotifyInterval);
-            spotifyInterval = null;
-        }
-        spotifyContent.innerHTML = ''; 
-        
-        if (isListeningToSpotify) {
-            const albumArtUrl = isListeningToSpotify.album_art_url;
-            const songName = isListeningToSpotify.song; 
-            const artistName = isListeningToSpotify.artist;
-            const duration = isListeningToSpotify.timestamps.end - isListeningToSpotify.timestamps.start;
-            const durationFormatted = formatTime(duration);
-
-            const spotifyHtml = `
-                <div class="spotify-track-info-new">
-                    <img src="${albumArtUrl}" class="spotify-album-art-new" alt="Album Art">
-                    <div class="spotify-details-new">
-                        <span class="spotify-title-new">${songName}</span>
-                        <span class="spotify-artist-new">${artistName}</span>
-                    </div>
-                </div>
-                <div class="spotify-progress-bar-new">
-                    <div id="spotifyProgressFill" class="spotify-progress-fill-new"></div>
-                </div>
-                <div class="spotify-timestamps-new">
-                    <span id="spotifyCurrentTime">${formatTime(0)}</span>
-                    <span>${durationFormatted}</span>
-                </div>
-            `;
-            
-            spotifyContent.innerHTML = spotifyHtml;
-
-            updateProgressBar(data); 
-            spotifyInterval = setInterval(() => updateProgressBar(data), 1000);
-        }
-
-
-        // --- Other Activities Management ---
-        let html = '';
-        const activities = data.activities || [];
-        
-        if (activities.length > 0) {
-            activities.forEach(activity => {
-                let details = activity.details || '';
-                let state = activity.state || '';
-                let name = activity.name || 'Custom Status';
-                let iconColor = limeColor; // Default lime
-                let titlePrefix = '';
-
-                if (activity.name === 'Spotify') return;
-                
-                if (activity.type === 0) { 
-                    titlePrefix = 'Playing: ';
-                    iconColor = green;
-                }
-                
-                if (activity.type !== 4 && activity.name !== 'Custom Status') {
-                    html += `
-                        <div class="discord-activity-item-new" style="border-left-color: ${iconColor};">
-                            <span class="discord-activity-title-new">${titlePrefix}${name}</span>
-                            ${details ? `<span class="discord-activity-details-new">${details}</span>` : ''}
-                            ${state ? `<span class="discord-activity-details-new">${state}</span>` : ''}
-                        </div>
-                    `;
-                }
-            });
-        }
-
-        if (html === '' && !isListeningToSpotify) {
-            html = '<p style="text-align:center; opacity:0.7; margin-top:15px;">No visible activity right now.</p>';
-        } else if (html === '' && isListeningToSpotify) {
-            html = '<p style="text-align:center; opacity:0.7; margin-top:15px;">No other visible activity besides Spotify.</p>'; 
-        }
-        
-        activityContent.innerHTML = html;
-    }
-
-    function fetchDiscordStatus() {
-        fetch(`https://api.lanyard.rest/v1/users/${DISCORD_USER_ID}`)
-            .then(response => response.json())
-            .then(result => {
-                if (result.success) {
-                    updateDiscordStatus(result.data);
-                } else {
-                    updateDiscordStatus(null);
-                }
-            })
-            .catch(error => {
-                console.error("Error fetching Lanyard status:", error);
-                updateDiscordStatus(null);
-            });
-    }
-
-    fetchDiscordStatus();
-    setInterval(fetchDiscordStatus, 10000); 
-    
-</script>
 </body>
 </html>
