@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@arbbon | صفحه پیدا نشد</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .glass-container {
+            background: rgba(255, 120, 0, 0.1);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 120, 0, 0.3);
+            padding: 40px 60px;
+            text-align: center;
+            z-index: 10;
+            position: relative;
+            max-width: 500px;
+            margin: 20px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 5em;
+            margin-bottom: 0.2em;
+            color: #ff9800;
+            text-shadow: 0 0 15px rgba(255, 152, 0, 0.6);
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 2em;
+            line-height: 1.6;
+        }
+
+        .home-button {
+            display: inline-block;
+            background: #ff9800;
+            color: #1a1a1a;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(255, 152, 0, 0.4);
+        }
+
+        .home-button:hover {
+            background: #ffa726;
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(255, 152, 0, 0.7);
+        }
+
+        .grid-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(to right, rgba(255, 152, 0, 0.08) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 152, 0, 0.08) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveGrid 60s linear infinite;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .glow-star {
+            position: absolute;
+            background: rgba(255, 152, 0, 0.7);
+            border-radius: 50%;
+            opacity: 0;
+            animation: glowAnimate 15s linear infinite;
+            filter: blur(8px);
+            z-index: 5;
+        }
+
+        @keyframes moveGrid {
+            from { background-position: 0 0; }
+            to { background-position: 50px 50px; }
+        }
+
+        @keyframes glowAnimate {
+            0% {
+                transform: translate(var(--x), var(--y)) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+                transform: translate(var(--x), var(--y)) scale(var(--s));
+            }
+            80% {
+                opacity: 0;
+            }
+            100% {
+                transform: translate(var(--x), var(--y)) scale(var(--s));
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-background"></div>
+    <script>
+        function createGlowStars(count) {
+            for (let i = 0; i < count; i++) {
+                const star = document.createElement('div');
+                star.className = 'glow-star';
+                const size = Math.random() * 8 + 4;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.setProperty('--x', `${Math.random() * window.innerWidth}px`);
+                star.style.setProperty('--y', `${Math.random() * window.innerHeight}px`);
+                star.style.setProperty('--s', `${Math.random() * 0.8 + 0.2}`);
+                star.style.animationDelay = `${Math.random() * 10}s`;
+                document.body.appendChild(star);
+            }
+        }
+        createGlowStars(50);
+    </script>
+
+    <div class="glass-container">
+        <h1>404</h1>
+        <p>ببخشید دوست من! من برای سایتم همچین صفحه ای طراحی نکردم</p>
+        <p>شاید آدرس رو اشتباه وارد کردی. ولی اگه میخوای این صفحه وجود داشته باشه</p>
+        <p>میتونی خبرم کنی! :)</p>
+        <p>Mail: contact@arbondev.ir</p>
+        <a href="/" class="home-button">مایلی به صفحه اصلی برگردی؟</a>
+    </div>
+</body>
+</html>
