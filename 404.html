@@ -13,7 +13,7 @@
             --bg-color: #ffffff;
             --text-main: #2d3436;
             --text-muted: #636e72;
-            --grid-color: #f0f0f0;
+            --grid-color: #f2f2f2;
         }
 
         * {
@@ -25,7 +25,6 @@
         body {
             font-family: 'Vazirmatn', sans-serif;
             background-color: var(--bg-color);
-            /* گرید استاتیک و بدون حرکت */
             background-image: 
                 linear-gradient(var(--grid-color) 1px, transparent 1px),
                 linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
@@ -38,37 +37,56 @@
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.8);
+            position: relative; /* برای تنظیم موقعیت آیکون نسبت به کارت */
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            border-radius: 32px;
-            padding: 60px 40px;
-            max-width: 500px;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            border-radius: 40px;
+            /* پدینگ بالا رو زیاد کردیم تا متن زیر آیکون قرار بگیره */
+            padding: 120px 40px 60px 40px; 
+            max-width: 520px;
             width: 90%;
             text-align: center;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+            box-shadow: 
+                0 10px 20px rgba(0, 0, 0, 0.02),
+                0 30px 70px rgba(0, 0, 0, 0.08),
+                0 50px 100px rgba(0, 0, 0, 0.05);
+            margin-top: 80px; /* برای اینکه آیکون از سقف مرورگر فاصله داشته باشه */
         }
 
         .warning-icon {
-            width: 150px;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            /* نصف قد آیکون به بالا منتقل می‌شود */
+            transform: translate(-50%, -50%); 
+            width: 220px; /* بزرگتر شد */
             height: auto;
-            margin-bottom: 30px;
-            /* استاتیک و بدون انیمیشن */
+            filter: drop-shadow(0 15px 25px rgba(255, 140, 0, 0.25));
         }
 
         h1 {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 800;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             color: var(--text-main);
         }
 
         p {
             font-size: 16px;
-            line-height: 1.8;
+            line-height: 1.9;
             color: var(--text-muted);
             margin-bottom: 35px;
+            white-space: pre-line;
+        }
+
+        .email-text {
+            display: block;
+            margin-top: 10px;
+            font-weight: 700;
+            color: var(--orange);
+            direction: ltr;
         }
 
         .btn {
@@ -76,22 +94,25 @@
             background-color: var(--orange);
             color: #fff;
             text-decoration: none;
-            padding: 14px 40px;
-            border-radius: 16px;
+            padding: 16px 45px;
+            border-radius: 18px;
             font-weight: 700;
             font-size: 16px;
-            transition: opacity 0.2s;
+            transition: all 0.2s;
+            box-shadow: 0 10px 20px rgba(255, 140, 0, 0.2);
         }
 
         .btn:hover {
-            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(255, 140, 0, 0.3);
+            opacity: 0.95;
         }
 
         .brand-footer {
-            margin-top: 30px;
+            margin-top: 40px;
             font-size: 13px;
             color: #b2bec3;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
@@ -104,12 +125,9 @@
         <h1>ببخشید!</h1>
         
         <p>
-            من برای سایتم همچین صفحه ای طراحی نکردم
-            ممکنه آدرس رو اشتباه وارد کرده باشی ولی اگه میخوای این صفحه
-            وجود داشته باشه میتونی خبرم کنی تا طراحیش کنم! :)
-
-            ایمیل:
-            contact@arbondev.ir
+            من برای سایتم همچین صفحه‌ای طراحی نکردم.
+            ممکنه آدرس رو اشتباه وارد کرده باشی، ولی اگه می‌خوای این صفحه وجود داشته باشه می‌تونی خبرم کنی تا طراحیش کنم! :)
+            <span class="email-text">contact@arbondev.ir</span>
         </p>
 
         <a href="/" class="btn">بازگشت به صفحه اصلی</a>
