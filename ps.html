@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pigstep 2029</title>
+  
+  <!-- Google Fonts: Space Grotesk, Fira Code & Lora for Wiki feel -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Lora:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Preload images to load instantly -->
+  <link rel="preload" href="/src/assets/images/corrupted_minecraft_mountain_1784491937287.jpg" as="image">
+  <link rel="preload" href="/src/assets/images/steve_3d_back_1784493347679.jpg" as="image">
+  
+  <style>
+    /* Dark Theme Portal Styles */
+    body.dark-mode {
+      background-color: #000000;
+      color: #ffffff;
+      font-family: 'Space Grotesk', sans-serif;
+      overflow: hidden;
+      transition: background-color 1s ease, color 1s ease;
+    }
+
+    /* Light Theme Wiki Styles */
+    body.light-mode {
+      background-color: #f6f6f6;
+      color: #202122;
+      font-family: 'Lora', serif;
+      overflow-y: auto;
+      overflow-x: hidden;
+      transition: background-color 1.5s ease, color 1.5s ease;
+    }
+
+    .terminal-font {
+      font-family: 'Fira Code', monospace;
+    }
+
+    /* Subtle CRT scanlines */
+    .scanlines {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        rgba(18, 16, 16, 0) 50%, 
+        rgba(0, 0, 0, 0.45) 50%
+      );
+      background-size: 100% 4px;
+      z-index: 999;
+      pointer-events: none;
+    }
+
+    @keyframes flicker {
+      0% { opacity: 0.95; }
+      50% { opacity: 1; }
+      100% { opacity: 0.94; }
+    }
+
+    .flicker {
+      animation: flicker 0.25s infinite;
+    }
+
+    /* Input shake animation */
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-5px); }
+      40%, 80% { transform: translateX(5px); }
+    }
+
+    .shake {
+      animation: shake 0.3s ease-in-out;
+    }
+
+    /* Redacted block animation */
+    .redacted {
+      background-color: #000000;
+      color: #000000;
+      cursor: help;
+      transition: color 0.3s ease;
+    }
+    .light-mode .redacted {
+      background-color: #202122;
+      color: #202122;
+    }
+    .redacted:hover {
+      color: #ff3333 !important;
+    }
+  </style>
+</head>
+<body class="dark-mode relative min-h-screen flex flex-col justify-between p-8 select-none">
+
+  <!-- Scanlines overlay (only in dark mode) -->
+  <div id="screen-scanlines" class="scanlines"></div>
+
+  <!-- Hidden keyword marker -->
+  <!-- # check the code -->
+
+  <!-- ==================== VIEW 1: DARK PORTAL ==================== -->
+  <div id="portal-view" class="flex-grow flex flex-col justify-between w-full h-full">
+    <!-- Corrupted Minecraft Mountain Background with 50% opacity -->
+    <div id="bg-mountain" class="fixed inset-0 w-full h-full pointer-events-none -z-10 bg-cover bg-center bg-no-repeat bg-fixed opacity-50 filter grayscale contrast-125" style="background-image: url('/src/assets/images/corrupted_minecraft_mountain_1784491937287.jpg');"></div>
+
+    <!-- Empty top spacer -->
+    <div></div>
+
+    <!-- Central Simple Interface -->
+    <main class="flex-grow flex flex-col justify-center items-center w-full max-w-md mx-auto z-10 gap-8">
+      
+      <!-- Simple Input & Apply button -->
+      <div id="input-container" class="w-full flex flex-col items-center justify-center">
+        <div class="w-full flex items-center border border-white/20 bg-black/90 text-white rounded overflow-hidden">
+          <input 
+            type="text" 
+            id="packedcode-input" 
+            placeholder="packedcode." 
+            class="w-full px-5 py-4 bg-transparent text-white border-none focus:outline-none placeholder-neutral-700 terminal-font text-center text-base tracking-widest lowercase"
+            autocomplete="off"
+            spellcheck="false"
+          >
+          <button 
+            id="packedcode-apply-btn" 
+            class="px-8 py-4 bg-white text-black hover:bg-neutral-200 font-bold transition-colors border-l border-white/20 duration-200 text-xs tracking-widest"
+          >
+            apply.
+          </button>
+        </div>
+        <p id="packedcode-err" class="text-[10px] text-red-600 mt-2.5 h-4 terminal-font uppercase tracking-widest"></p>
+      </div>
+
+      <!-- Mysterious Corrupted Caesar Cipher Text -->
+      <div class="text-center mt-2">
+        <p class="terminal-font text-xs text-neutral-500 tracking-wider flicker cursor-help select-all" title="Shift key is 3">
+          fkhfn wkh frgh
+        </p>
+      </div>
+
+    </main>
+
+    <!-- Clean Minimalist Footer -->
+    <footer class="w-full flex justify-center items-center text-[10px] text-neutral-600 tracking-widest uppercase z-10">
+      <span>copyrighted by mojang</span>
+    </footer>
+  </div>
+
+  <!-- ==================== VIEW 2: CREEPY STAGE OVERLAY ==================== -->
+  <div id="creepy-overlay" class="fixed inset-0 bg-[#020202] z-[9999] hidden flex-col items-center justify-center p-4 overflow-hidden select-none">
+    <!-- Red dark vignette -->
+    <div class="absolute inset-0 pointer-events-none shadow-[inset_0_0_150px_rgba(255,0,0,0.6)] z-20 animate-pulse"></div>
+    <div class="absolute inset-0 bg-red-950/5 mix-blend-color-burn pointer-events-none z-10"></div>
+    
+    <!-- Steve 3D back image -->
+    <div class="absolute inset-0 bg-no-repeat bg-cover bg-center filter saturate-[0.1] contrast-[2.5] brightness-[0.55]" style="background-image: url('/src/assets/images/steve_3d_back_1784493347679.jpg'); max-width: 1000px; width: 100%; aspect-ratio: 16/9; margin: auto; border: 1px solid rgba(255, 0, 0, 0.15);"></div>
+
+    <!-- Bottom Left Text: weareaware -->
+    <div class="absolute bottom-10 left-10 text-red-800 terminal-font text-lg md:text-xl font-bold tracking-[0.35em] select-all z-30 filter drop-shadow-[0_0_10px_rgba(255,0,0,0.7)] animate-pulse uppercase">
+      weareaware
+    </div>
+
+    <!-- Custom creepy status message -->
+    <div class="absolute top-10 left-10 text-neutral-500 terminal-font text-[10px] tracking-widest uppercase z-30">
+      audio transmission in progress...
+    </div>
+  </div>
+
+  <!-- ==================== VIEW 3: SECURE LIGHT-MODE WIKI ==================== -->
+  <div id="wiki-view" class="hidden w-full max-w-4xl mx-auto py-10 px-4 md:px-8 bg-white border border-neutral-300 shadow-md my-6 rounded">
+    
+    <!-- Wiki Header Banner -->
+    <div class="border-b border-neutral-300 pb-4 mb-6 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+      <div>
+        <div class="text-xs text-neutral-500 uppercase tracking-wider mb-1">Archive Entry // File-9202</div>
+        <h1 class="text-3xl md:text-4xl font-serif font-semibold text-neutral-900 tracking-tight">The 2029 Sunset of Minecraft</h1>
+      </div>
+      <div class="text-right text-xs text-neutral-500 terminal-font">
+        Last modified: October 17, 2029
+      </div>
+    </div>
+
+    <!-- Wiki Grid Content -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      
+      <!-- Left Column: Main Article -->
+      <div class="lg:col-span-2 space-y-6 leading-relaxed text-sm text-neutral-800">
+        
+        <p class="italic text-neutral-600 bg-neutral-50 p-4 border-l-4 border-neutral-400 rounded">
+          This article describes the classified events leading up to the unexpected server termination of "Minecraft" in late 2029. Document recovered from deep network relays.
+        </p>
+
+        <h2 class="text-xl font-serif font-semibold text-neutral-900 border-b border-neutral-200 pb-2">Background</h2>
+        <p>
+          On June 11, 2029, a series of anonymous packets were sent to Mojang's main distribution servers. The source, originating from a masked local domain <span class="redacted px-1">lunaaylar.ir</span>, inserted a corrupted audio file known internally as <span class="terminal-font text-xs font-semibold">Pigstep_2029_v9</span>. Players who accessed the file reported hearing severe high-frequency static and synthetic <del>crying noises</del> mimicking the sounds of entities that were never coded.
+        </p>
+
+        <h2 class="text-xl font-serif font-semibold text-neutral-900 border-b border-neutral-200 pb-2">The Steve Entity & Deletion</h2>
+        <p>
+          Following the patch, automated telemetry logs recorded high levels of self-harming behavior within simulated client environments. Specifically, the player model <span class="font-semibold">Steve</span> would bypass normal pathfinding routines, retreat into deep underground bedrock layers, and repeatedly trigger eating animations on <span class="redacted px-1">its own player data models</span>. This anomaly was deemed highly disturbing and corrupted the client's localized memory stacks.
+        </p>
+        <p>
+          By September 2029, over 94% of operational servers had locked up entirely. On October 17, Mojang issued an official <del>unannounced sunset sequence</del> erasing all primary backups. 
+        </p>
+
+        <h2 class="text-xl font-serif font-semibold text-neutral-900 border-b border-neutral-200 pb-2">Decryption Keys</h2>
+        <p>
+          To unlock the rest of the recovered data blocks, analysts must utilize the keys hidden within the transmission sequences:
+        </p>
+        <ul class="list-disc list-inside space-y-2 pl-4 text-neutral-700">
+          <li><strong>The Redacted Domain:</strong> The signal points back to a remote file server hosted under a secure subdirectory.</li>
+          <li><strong>Vigenère Key:</strong> Check the third phase of the code: <span class="terminal-font text-xs bg-neutral-100 p-1 rounded">"weareaware"</span> remains the master handshake.</li>
+          <li><strong>Cipher Clue:</strong> Look at the Caesar offset used previously. The shift sequence is exactly <span class="font-semibold">three steps backwards</span>.</li>
+        </ul>
+
+        <div class="bg-red-50 border border-red-200 p-4 rounded text-xs text-red-800 mt-6 leading-normal">
+          <strong>WARNING:</strong> Do not attempt to play the synthesized audio in loop mode on local browsers for more than 5 minutes. The acoustic pattern matches a neurologically unstable signature.
+        </div>
+
+      </div>
+
+      <!-- Right Column: Info box -->
+      <div class="lg:col-span-1">
+        <div class="border border-neutral-300 bg-neutral-50 p-4 rounded shadow-sm text-xs">
+          <div class="text-center font-serif font-bold text-sm border-b border-neutral-300 pb-2 mb-3">
+            Incident Metadata
+          </div>
+          <div class="space-y-3">
+            <div>
+              <span class="font-semibold text-neutral-600 block">Classified ID</span>
+              <span class="terminal-font text-neutral-800">#PIGSTEP-2029-A</span>
+            </div>
+            <div>
+              <span class="font-semibold text-neutral-600 block">Incident Date</span>
+              <span class="text-neutral-800">October 17, 2029</span>
+            </div>
+            <div>
+              <span class="font-semibold text-neutral-600 block">Status</span>
+              <span class="text-red-700 font-bold uppercase animate-pulse">Terminated</span>
+            </div>
+            <div>
+              <span class="font-semibold text-neutral-600 block">Source IP Hash</span>
+              <span class="terminal-font text-neutral-800 text-[11px] block break-all">6c 75 6e 61 61 79 6c 61 72 2e 69 72</span>
+            </div>
+            <div>
+              <span class="font-semibold text-neutral-600 block">Primary Target</span>
+              <span class="text-neutral-800">Steve Entity (Instance 0)</span>
+            </div>
+          </div>
+          <div class="mt-6 pt-3 border-t border-neutral-300 text-center text-[10px] text-neutral-500">
+            CONFIDENTIAL MATERIAL // MOJANG ARCHIVES
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Wiki Footer -->
+    <div class="mt-12 pt-4 border-t border-neutral-200 flex justify-between items-center text-xs text-neutral-500">
+      <span>Powered by MediaWiki Custom Client</span>
+      <button id="btn-back-portal" class="hover:text-red-600 transition-colors underline">
+        [return to portal]
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Audio Processing Script -->
+  <script>
+    let audioContext = null;
+    let nextLoopTimeout = null;
+    let isAudioInited = false;
+    window.isCreepyActive = false;
+
+    // Instant image preloading objects
+    const imgPreloadMountain = new Image();
+    imgPreloadMountain.src = '/src/assets/images/corrupted_minecraft_mountain_1784491937287.jpg';
+    const imgPreloadSteve = new Image();
+    imgPreloadSteve.src = '/src/assets/images/steve_3d_back_1784493347679.jpg';
+
+    const MORSE_MAP = {
+      'a': '.-', 'b': '-...', 'c': '-.-.', 'd': '-..', 'e': '.', 'f': '..-.',
+      'g': '--.', 'h': '....', 'i': '..', 'j': '.---', 'k': '-.-', 'l': '.-..',
+      'm': '--', 'n': '-.', 'o': '---', 'p': '.--.', 'q': '--.-', 'r': '.-.',
+      's': '...', 't': '-', 'u': '..-', 'v': '...-', 'w': '.--', 'x': '-..-',
+      'y': '-.--', 'z': '--..',
+      '1': '.----', '2': '..---', '3': '...--', '4': '....-', '5': '.....',
+      '6': '-....', '7': '--...', '8': '---..', '9': '----.', '0': '-----',
+      '.': '.-.-.-', '/': '-..-.', ':': '---...'
+    };
+
+    const TRANSMISSION_TEXT = "lunaaylar.ir/wps.html";
+
+    function initAudioContext() {
+      if (isAudioInited) return;
+      const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtxClass) return;
+      audioContext = new AudioCtxClass();
+      isAudioInited = true;
+    }
+
+    function textToMorseSequence(text) {
+      return text.toLowerCase().split('').map(char => {
+        if (char === ' ') return '   ';
+        return MORSE_MAP[char] || '';
+      }).join(' ');
+    }
+
+    // Function to play Morse Code exactly ONCE and notify on completion
+    function playMorseOnce(onComplete) {
+      if (!audioContext) return;
+      if (audioContext.state === 'suspended') {
+        audioContext.resume();
+      }
+
+      const morseStr = textToMorseSequence(TRANSMISSION_TEXT);
+      const dotDuration = 0.085;
+      const dashDuration = dotDuration * 3;
+      const freq = 640;
+
+      function playSingleBeep(startTime, duration) {
+        const osc = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+
+        // High pitch scary sawtooth wave
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(freq * 0.7, startTime);
+
+        // Creepy sliding frequency
+        osc.frequency.linearRampToValueAtTime(freq * 0.35, startTime + duration);
+
+        gain.gain.setValueAtTime(0, startTime);
+        gain.gain.linearRampToValueAtTime(0.12, startTime + 0.01);
+        gain.gain.setValueAtTime(0.12, startTime + duration - 0.01);
+        gain.gain.linearRampToValueAtTime(0, startTime + duration);
+
+        osc.connect(gain);
+        gain.connect(audioContext.destination);
+
+        osc.start(startTime);
+        osc.stop(startTime + duration);
+      }
+
+      let currentTime = audioContext.currentTime + 0.05;
+
+      for (let i = 0; i < morseStr.length; i++) {
+        const char = morseStr[i];
+        if (char === '.') {
+          playSingleBeep(currentTime, dotDuration);
+          currentTime += dotDuration + dotDuration;
+        } else if (char === '-') {
+          playSingleBeep(currentTime, dashDuration);
+          currentTime += dashDuration + dotDuration;
+        } else if (char === ' ') {
+          currentTime += dotDuration * 2;
+        }
+      }
+
+      // Calculate exact end time
+      const totalDurationMs = (currentTime - audioContext.currentTime) * 1000;
+      nextLoopTimeout = setTimeout(onComplete, totalDurationMs);
+    }
+
+    // Synthesizes a terrifying frequency shift scream with noise distortion
+    function playTerrifyingFrequencyShift(onComplete) {
+      if (!audioContext) {
+        onComplete();
+        return;
+      }
+      
+      const now = audioContext.currentTime;
+      const duration = 2.2; // 2.2 seconds sound
+
+      // Create dual oscillators
+      const osc1 = audioContext.createOscillator();
+      const osc2 = audioContext.createOscillator();
+      
+      // Create a noise generator for static corruption sound
+      const bufferSize = audioContext.sampleRate * duration;
+      const buffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        data[i] = Math.random() * 2 - 1;
+      }
+      const noiseNode = audioContext.createBufferSource();
+      noiseNode.buffer = buffer;
+
+      // Resonant sweep filter
+      const filter = audioContext.createBiquadFilter();
+      filter.type = 'peaking';
+      filter.Q.setValueAtTime(12, now);
+      filter.frequency.setValueAtTime(1800, now);
+      filter.frequency.exponentialRampToValueAtTime(80, now + duration);
+
+      // Gain controls
+      const gainOsc = audioContext.createGain();
+      const gainNoise = audioContext.createGain();
+      const mainGain = audioContext.createGain();
+
+      osc1.type = 'sawtooth';
+      osc1.frequency.setValueAtTime(1100, now);
+      osc1.frequency.exponentialRampToValueAtTime(60, now + duration);
+
+      osc2.type = 'square';
+      osc2.frequency.setValueAtTime(1110, now);
+      osc2.frequency.exponentialRampToValueAtTime(62, now + duration);
+
+      gainOsc.gain.setValueAtTime(0.15, now);
+      gainOsc.gain.linearRampToValueAtTime(0.01, now + duration);
+
+      gainNoise.gain.setValueAtTime(0.06, now);
+      gainNoise.gain.linearRampToValueAtTime(0.25, now + duration * 0.7);
+      gainNoise.gain.linearRampToValueAtTime(0.01, now + duration);
+
+      mainGain.gain.setValueAtTime(0, now);
+      mainGain.gain.linearRampToValueAtTime(0.35, now + 0.15);
+      mainGain.gain.setValueAtTime(0.35, now + duration - 0.25);
+      mainGain.gain.linearRampToValueAtTime(0, now + duration);
+
+      osc1.connect(gainOsc);
+      osc2.connect(gainOsc);
+      noiseNode.connect(gainNoise);
+
+      gainOsc.connect(filter);
+      gainNoise.connect(filter);
+      filter.connect(mainGain);
+      mainGain.connect(audioContext.destination);
+
+      osc1.start(now);
+      osc2.start(now);
+      noiseNode.start(now);
+
+      osc1.stop(now + duration);
+      osc2.stop(now + duration);
+      noiseNode.stop(now + duration);
+
+      setTimeout(onComplete, duration * 1000);
+    }
+
+    function stopMorseBeepLoop() {
+      if (nextLoopTimeout) {
+        clearTimeout(nextLoopTimeout);
+        nextLoopTimeout = null;
+      }
+    }
+
+    // Auto-resume audio contexts on click safely
+    document.body.addEventListener('click', () => {
+      if (isAudioInited && audioContext && audioContext.state === 'suspended') {
+        audioContext.resume();
+      }
+    });
+
+    // Verification and event triggering
+    const SECRET_CODE = "check the code";
+
+    document.getElementById('packedcode-apply-btn').addEventListener('click', verifyCode);
+    document.getElementById('packedcode-input').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        verifyCode();
+      }
+    });
+
+    function verifyCode() {
+      const val = document.getElementById('packedcode-input').value.trim().toLowerCase();
+      const err = document.getElementById('packedcode-err');
+      const container = document.getElementById('input-container');
+
+      if (val === SECRET_CODE) {
+        err.innerText = "";
+        triggerHorrorScene();
+      } else {
+        err.innerText = "ACCESS REJECTED";
+        container.classList.add('shake');
+        setTimeout(() => {
+          container.classList.remove('shake');
+        }, 400);
+      }
+    }
+
+    function triggerHorrorScene() {
+      const overlay = document.getElementById('creepy-overlay');
+      const statusEl = document.getElementById('morse-status');
+
+      // Initialize sound system
+      initAudioContext();
+
+      // Show creepy overlay (Steve eating raw meat in 3D from behind)
+      overlay.classList.remove('hidden');
+      overlay.classList.add('flex');
+
+      if (statusEl) {
+        statusEl.innerText = "MORSE: PLAYING SEQUENCE";
+        statusEl.classList.remove('text-neutral-600');
+        statusEl.classList.add('text-red-600', 'animate-pulse');
+      }
+
+      // Play the full Morse code transmission exactly once
+      playMorseOnce(() => {
+        // Morse code finished! Hide the overlay immediately
+        overlay.classList.add('hidden');
+        overlay.classList.remove('flex');
+        
+        if (statusEl) {
+          statusEl.innerText = "MORSE: INACTIVE";
+          statusEl.classList.remove('text-red-600', 'animate-pulse');
+          statusEl.classList.add('text-neutral-600');
+        }
+
+        // Play the terrifying frequency-shift static transition scream
+        playTerrifyingFrequencyShift(() => {
+          // Once the horror static scream finishes, switch theme and show Wiki view
+          switchToWikiView();
+        });
+      });
+    }
+
+    function switchToWikiView() {
+      // Transition from dark mode to light mode Wiki
+      document.body.classList.remove('dark-mode');
+      document.body.classList.add('light-mode');
+      
+      document.getElementById('portal-view').classList.add('hidden');
+      document.getElementById('screen-scanlines').classList.add('hidden');
+      
+      const wikiView = document.getElementById('wiki-view');
+      wikiView.classList.remove('hidden');
+      
+      // Auto scroll to top of Wiki page
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Return to portal button handler
+    document.getElementById('btn-back-portal').addEventListener('click', () => {
+      document.body.classList.remove('light-mode');
+      document.body.classList.add('dark-mode');
+      
+      document.getElementById('portal-view').classList.remove('hidden');
+      document.getElementById('screen-scanlines').classList.remove('hidden');
+      
+      document.getElementById('wiki-view').classList.add('hidden');
+      document.getElementById('packedcode-input').value = '';
+    });
+  </script>
+</body>
+</html>
